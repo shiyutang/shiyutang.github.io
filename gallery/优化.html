@@ -165,9 +165,9 @@ A=\left[\begin{array}{cccc}{\frac{\partial^{2} f}{\partial x_{1}^{2}}} & {\frac{
 <script type="math/tex; mode=display">
 f(x)>\lambda f(x^{\prime})+(1-\lambda) f(x) \geq f(\lambda x^{\prime}+(1-\lambda) x) = f(x + \lambda (x^{\prime}- x))</script><p>上式与其为局部极小值矛盾（假设 $x^{\prime}- x$ 为极小量）</p>
 <h4 id="2-与凸集的关系"><a href="#2-与凸集的关系" class="headerlink" title="2.与凸集的关系"></a>2.与凸集的关系</h4><p>通过下面的公式截取部分凸函数对应的定义域我们就可以得到凸集。</p>
-<p>对于凸函数 $f(x)$，定义集合 $S_{b}:={x | x \in X \text { and } f(x) \leq b}$，则集合 $S_b$ 为凸集</p>
+<p>对于凸函数 $f(x)$，定义集合 $S_{b}:=\{x | x \in X \text { and } f(x) \leq b\}$，则集合 $S_b$ 为凸集</p>
 <p>通过平面截取的定义域，能保证平面在截取的自变量范围对应的函数部分都小于 b，而由凸函数的性质，这部分是线性变化的，也就是满足凸集的定义。</p>
-<p>证明：对于点 $x,x’ \in S<em>b$, 有 $f\left(\lambda x+(1-\lambda) x^{\prime}\right) \leq \lambda f(x)+(1-\lambda) f\left(x^{\prime}\right) \leq b$, 故 $\lambda x+(1-\lambda) x^{\prime} \in S</em>{b}$</p>
+<p>证明：对于点 $x,x’ \in S_b$, 有 $f\left(\lambda x+(1-\lambda) x^{\prime}\right) \leq \lambda f(x)+(1-\lambda) f\left(x^{\prime}\right) \leq b$, 故 $\lambda x+(1-\lambda) x^{\prime} \in S_{b}$</p>
 <p>通过截取 $f(x, y)=0.5 x^{2}+\cos (2 \pi y)$ 的定义域，即便函数值都小于 b，我们也不能得到凸集，因为原函数并不是一个凸函数，示意图如下：</p>
 <p><img src="Pics/convexfunset.svg" alt="img"></p>
 <h4 id="3-凸函数与二阶导数"><a href="#3-凸函数与二阶导数" class="headerlink" title="3.凸函数与二阶导数"></a>3.凸函数与二阶导数</h4><p>$f^{‘’}(x) \ge 0 \Longleftrightarrow f(x)$ 是凸函数</p>
@@ -202,7 +202,7 @@ f^{\prime \prime}(x)=\lim _{\varepsilon \rightarrow 0} \frac{f(x+\epsilon)+f(x-\
 </li>
 </ol>
 <p>这一章我们会介绍几种基于梯度的优化算法，从应用于一般优化问题的梯度下降算法出发，我们发现确定学习步长是一个重要的问题，即便在二阶方法-牛顿法中也是如此；接下来我们再介绍应用在深度学习模型中的随机梯度下降法和小批量随机梯度下降法。</p>
-<h2 id="最陡梯度下降法"><a href="#最陡梯度下降法" class="headerlink" title="最陡梯度下降法"></a>最陡梯度下降法</h2><p>梯度是形如 $（\nabla f(x<em>{1}),…,\nabla f(x</em>{n})）$的向量，其用来在函数中表示下降最快的方向，而方向导数则是代表某一个方向下的梯度投影的结果，是一个向量，因此我们可以使用优化平面的梯度来对自变量的位置进行更新，这就称作梯度下降法，或者最速下降法。</p>
+<h2 id="最陡梯度下降法"><a href="#最陡梯度下降法" class="headerlink" title="最陡梯度下降法"></a>最陡梯度下降法</h2><p>梯度是形如 $（\nabla f(x_{1}),…,\nabla f(x_{n})）$的向量，其用来在函数中表示下降最快的方向，而方向导数则是代表某一个方向下的梯度投影的结果，是一个向量，因此我们可以使用优化平面的梯度来对自变量的位置进行更新，这就称作梯度下降法，或者最速下降法。</p>
 <p>梯度下降法使用$f(x)_{new} = f(x - \eta f{^\prime}(x) )$ 来更新自变量来获得更小的函数值；</p>
 <p>我们定义损失函数如下：<br>对于有 $n$ 个样本对训练数据集，设 $f_i(x)$ 是第 $i$ 个样本的损失函数, 则目标函数为:</p>
 <script type="math/tex; mode=display">
@@ -372,14 +372,14 @@ show_trace(newton(0.5), f, 40)
 <li>牛顿法对于非凸函数依旧需要设置学习率来满足 Wolfe 条件，Wolfe 条件分别是最快下降条件和曲率条件，其保证了下降的速率。详细说明可以见<a href="https://www.jiqizhixin.com/graph/technologies/4761e6c4-223c-431f-9110-8b184068a885">这里</a></li>
 </ul>
 <h3 id="收敛性分析"><a href="#收敛性分析" class="headerlink" title="收敛性分析"></a>收敛性分析</h3><p>只考虑在函数为凸函数, 且最小值点上 $f’’(x^*) &gt; 0$ 时的收敛速度：</p>
-<p>令 $x<em>k$ 为第 $k$ 次迭代后 $x$ 的值， $e</em>{k}:=x_{k}-x^{<em>}$ 表示 $x_k$ 到最小值点 $x^{</em>}$ 的距离，由 $f’(x^{*}) = 0$:</p>
+<p>令 $x_k$ 为第 $k$ 次迭代后 $x$ 的值， $e_{k}:=x_{k}-x^{<em>}$ 表示 $x_k$ 到最小值点 $x^{</em>}$ 的距离，由 $f’(x^{*}) = 0$:</p>
 <script type="math/tex; mode=display">
 0=f^{\prime}\left(x_{k}-e_{k}\right)=f^{\prime}\left(x_{k}\right)-e_{k} f^{\prime \prime}\left(x_{k}\right)+\frac{1}{2} e_{k}^{2} f^{\prime \prime \prime}\left(\xi_{k}\right) \text{for some } \xi_{k} \in\left[x_{k}-e_{k}, x_{k}\right]</script><p>两边除以 $f’’(x_k)$, 有：</p>
 <script type="math/tex; mode=display">
-e_{k}-f^{\prime}\left(x_{k}\right) / f^{\prime \prime}\left(x_{k}\right)=\frac{1}{2} e_{k}^{2} f^{\prime \prime \prime}\left(\xi_{k}\right) / f^{\prime \prime}\left(x_{k}\right)</script><p>代入更新方程 $x<em>{k+1} = x</em>{k} - f^{\prime}\left(x<em>{k}\right) / f^{\prime \prime}\left(x</em>{k}\right)$, 得到：</p>
+e_{k}-f^{\prime}\left(x_{k}\right) / f^{\prime \prime}\left(x_{k}\right)=\frac{1}{2} e_{k}^{2} f^{\prime \prime \prime}\left(\xi_{k}\right) / f^{\prime \prime}\left(x_{k}\right)</script><p>代入更新方程 $x_{k+1} = x_{k} - f^{\prime}\left(x_{k}\right) / f^{\prime \prime}\left(x_{k}\right)$, 得到：</p>
 <script type="math/tex; mode=display">
 x_k - x^{*} - f^{\prime}\left(x_{k}\right) / f^{\prime \prime}\left(x_{k}\right) =\frac{1}{2} e_{k}^{2} f^{\prime \prime \prime}\left(\xi_{k}\right) / f^{\prime \prime}\left(x_{k}\right)</script><script type="math/tex; mode=display">
-x_{k+1} - x^{*} = e_{k+1} = \frac{1}{2} e_{k}^{2} f^{\prime \prime \prime}\left(\xi_{k}\right) / f^{\prime \prime}\left(x_{k}\right)</script><p>当 $\frac{1}{2} f^{\prime \prime \prime}\left(\xi<em>{k}\right) / f^{\prime \prime}\left(x</em>{k}\right) \leq c$ 时，有:</p>
+x_{k+1} - x^{*} = e_{k+1} = \frac{1}{2} e_{k}^{2} f^{\prime \prime \prime}\left(\xi_{k}\right) / f^{\prime \prime}\left(x_{k}\right)</script><p>当 $\frac{1}{2} f^{\prime \prime \prime}\left(\xi_{k}\right) / f^{\prime \prime}\left(x_{k}\right) \leq c$ 时，有:</p>
 <script type="math/tex; mode=display">
 e_{k+1} \leq c e_{k}^{2}</script><p>结论： 牛顿法迭代一次可以使得 $x_k+1$ 到最小值点 $x^{<em>}$ 的距离 小于等于 $x_k$ 到最小值点 $x^{</em>}$ 的距离的平方的 c 倍</p>
 <h3 id="共轭梯度法"><a href="#共轭梯度法" class="headerlink" title="共轭梯度法"></a>共轭梯度法</h3><p>共轭梯度法是介于最速下降法与牛顿法之间的一个方法，它仅需一阶导数信息，但克服了最速下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hesse矩阵并求逆的缺点。 共轭梯度法的基本思想是把共轭性与最速下降法相结合，利用已知点处的梯度构造一组共轭方向，并沿这组方向进行搜索，求出目标函数的极小点。</p>
@@ -520,10 +520,10 @@ train_pytorch_ch7(optim.SGD, {&quot;lr&quot;: 0.05}, features, labels, 10) # 小
 </li>
 </ol>
 <h1 id="优化算法进阶"><a href="#优化算法进阶" class="headerlink" title="优化算法进阶"></a>优化算法进阶</h1><p>这一节我们通过介绍两种方法来解决优化平面 ill-conditioned 的问题，并就这个问题引出现有的很多优化算法。</p>
-<h2 id="病态问题"><a href="#病态问题" class="headerlink" title="病态问题"></a>病态问题</h2><p>什么是病态问题呢？它描述的是优化平面由于输入不同维度的量纲以及幅度差异很大等原因，导致在某一些维度 $D<em>{slow}$ 损失函数值变化非常缓慢，而在另一些维度 $D</em>{fast}$ 损失函数值变化很快。从而导致基于梯度的算法在 $D_{fast}$ 维度不断震荡，从而难以优化到正确位置的情况。</p>
+<h2 id="病态问题"><a href="#病态问题" class="headerlink" title="病态问题"></a>病态问题</h2><p>什么是病态问题呢？它描述的是优化平面由于输入不同维度的量纲以及幅度差异很大等原因，导致在某一些维度 $D_{slow}$ 损失函数值变化非常缓慢，而在另一些维度 $D_{fast}$ 损失函数值变化很快。从而导致基于梯度的算法在 $D_{fast}$ 维度不断震荡，从而难以优化到正确位置的情况。</p>
 <h3 id="病态问题的公式定义"><a href="#病态问题的公式定义" class="headerlink" title="病态问题的公式定义"></a>病态问题的公式定义</h3><p>Hessian 矩阵中的条件数:</p>
 <script type="math/tex; mode=display">
- cond_{H} = \frac{\lambda_{max}}{\lambda_{min}}</script><p>$\lambda<em>{max}, \lambda</em>{min}$ 分别是 Hessian 矩阵中最大和最小的特征值. 条件数较大则为病态问题</p>
+ cond_{H} = \frac{\lambda_{max}}{\lambda_{min}}</script><p>$\lambda_{max}, \lambda_{min}$ 分别是 Hessian 矩阵中最大和最小的特征值. 条件数较大则为病态问题</p>
 <p>让我们考虑一个输入和输出分别为二维向量$\boldsymbol{x} = [x_1, x_2]^\top$和标量的目标函数:</p>
 <script type="math/tex; mode=display">
  f(\boldsymbol{x})=0.1x_1^2+2x_2^2</script><script type="math/tex; mode=display">
@@ -605,7 +605,7 @@ show_trace_2d(f_2d, train_2d_momentum(momentum_2d))
 eta = 0.6
 show_trace_2d(f_2d, train_2d_momentum(momentum_2d))
 </code></pre>
-<h3 id="Exponential-Moving-Average"><a href="#Exponential-Moving-Average" class="headerlink" title="Exponential Moving Average"></a>Exponential Moving Average</h3><p>为了从数学上理解动量法，让我们先解释一下指数加权移动平均（exponential moving average）。给定超参数 $0 \leq \beta &lt; 1$，当前时间步 $t$ 的变量 $y<em>t$ 是上一时间步 $t-1$ 的变量 $y</em>{t-1}$ 和当前时间步另一变量 $x_t$ 的线性组合：</p>
+<h3 id="Exponential-Moving-Average"><a href="#Exponential-Moving-Average" class="headerlink" title="Exponential Moving Average"></a>Exponential Moving Average</h3><p>为了从数学上理解动量法，让我们先解释一下指数加权移动平均（exponential moving average）。给定超参数 $0 \leq \beta &lt; 1$，当前时间步 $t$ 的变量 $y_t$ 是上一时间步 $t-1$ 的变量 $y_{t-1}$ 和当前时间步另一变量 $x_t$ 的线性组合：</p>
 <script type="math/tex; mode=display">
 y_t = \beta y_{t-1} + (1-\beta) x_t.</script><p>我们可以对 $y_t$ 展开：</p>
 <script type="math/tex; mode=display">
@@ -630,7 +630,7 @@ y_t \approx 0.05 \sum_{i=0}^{19} 0.95^i x_{t-i}.</script><p>因此，在实际�
 \begin{aligned}
 \boldsymbol{x}_t &\leftarrow \boldsymbol{x}_{t-1} - \alpha_t \boldsymbol{m}_t,
 \end{aligned}</script><script type="math/tex; mode=display">
-\alpha_t = \frac{\eta_t}{1-\beta}</script><p>由指数加权移动平均的形式可得，速度变量 $\boldsymbol{v}<em>t$ 实际上对序列 ${\frac{\eta</em>{t-i}}{1 - \beta} \boldsymbol{g}_{t-i}: i=0,\ldots,1/(1-\beta)-1}$ 做了指数加权移动平均。换句话说，相比于小批量随机梯度下降，动量法在每个时间步的自变量更新量近似于将前者对应的最近 $1/(1-\beta)$ 个时间步的更新量做了指数加权移动平均后再除以 $1-\beta$(更新速率放大了 $1/(1-\beta)$ 倍)。</p>
+\alpha_t = \frac{\eta_t}{1-\beta}</script><p>由指数加权移动平均的形式可得，速度变量 $\boldsymbol{v}_t$ 实际上对序列 $\{\frac{\eta_{t-i}}{1 - \beta} \boldsymbol{g}_{t-i}: i=0,\ldots,1/(1-\beta)-1\}$ 做了指数加权移动平均。换句话说，相比于小批量随机梯度下降，动量法在每个时间步的自变量更新量近似于将前者对应的最近 $1/(1-\beta)$ 个时间步的更新量做了指数加权移动平均后再除以 $1-\beta$(更新速率放大了 $1/(1-\beta)$ 倍)。</p>
 <p>所以，在动量法中，自变量在各个方向上的移动幅度不仅取决当前梯度，还取决于过去的各个梯度在各个方向上是否一致。在本节之前示例的优化问题中，所有梯度在水平方向上为正（向右），而在竖直方向上时正（向上）时负（向下）。这样，我们就可以使用较大的学习率，从而使自变量向最优解更快移动。</p>
 <h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><p>相对于小批量随机梯度下降，动量法需要对每一个自变量维护一个同它一样形状的速度变量，且超参数里多了动量超参数。实现中，我们将速度变量用更广义的状态变量<code>states</code>表示。</p>
 <pre><code class="lang-python">
@@ -786,7 +786,7 @@ def rmsprop(params, states, hyperparams):
 <h1 id="11-9-AdaDelta"><a href="#11-9-AdaDelta" class="headerlink" title="11.9 AdaDelta"></a>11.9 AdaDelta</h1><p>除了RMSProp算法以外，另一个常用优化算法AdaDelta算法也针对AdaGrad算法在迭代后期可能较难找到有用解的问题做了改进 [1]。有意思的是，AdaDelta算法没有学习率这一超参数。</p>
 <h2 id="Algorithm-2"><a href="#Algorithm-2" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>AdaDelta算法也像RMSProp算法一样，使用了小批量随机梯度$\boldsymbol{g}_t$按元素平方的指数加权移动平均变量$\boldsymbol{s}_t$。在时间步0，它的所有元素被初始化为0。给定超参数$0 \leq \rho 0$，同RMSProp算法一样计算</p>
 <script type="math/tex; mode=display">
-\boldsymbol{s}_t \leftarrow \rho \boldsymbol{s}_{t-1} + (1 - \rho) \boldsymbol{g}_t \odot \boldsymbol{g}_t.</script><p>与RMSProp算法不同的是，AdaDelta算法还维护一个额外的状态变量$\Delta\boldsymbol{x}<em>t$，其元素同样在时间步0时被初始化为0。我们使用$\Delta\boldsymbol{x}</em>{t-1}$来计算自变量的变化量：</p>
+\boldsymbol{s}_t \leftarrow \rho \boldsymbol{s}_{t-1} + (1 - \rho) \boldsymbol{g}_t \odot \boldsymbol{g}_t.</script><p>与RMSProp算法不同的是，AdaDelta算法还维护一个额外的状态变量$\Delta\boldsymbol{x}_t$，其元素同样在时间步0时被初始化为0。我们使用$\Delta\boldsymbol{x}_{t-1}$来计算自变量的变化量：</p>
 <script type="math/tex; mode=display">
  \boldsymbol{g}_t' \leftarrow \sqrt{\frac{\Delta\boldsymbol{x}_{t-1} + \epsilon}{\boldsymbol{s}_t + \epsilon}}   \odot \boldsymbol{g}_t,</script><p>其中$\epsilon$是为了维持数值稳定性而添加的常数，如$10^{-5}$。接着更新自变量：</p>
 <script type="math/tex; mode=display">
@@ -814,7 +814,7 @@ def adadelta(params, states, hyperparams):
 <script type="math/tex; mode=display">
 \boldsymbol{m}_t \leftarrow \beta_1 \boldsymbol{m}_{t-1} + (1 - \beta_1) \boldsymbol{g}_t.</script><p>和RMSProp算法中一样，给定超参数$0 \leq \beta_2 &lt; 1$（算法作者建议设为0.999），<br>将小批量随机梯度按元素平方后的项$\boldsymbol{g}_t \odot \boldsymbol{g}_t$做指数加权移动平均得到$\boldsymbol{v}_t$：</p>
 <script type="math/tex; mode=display">
-\boldsymbol{v}_t \leftarrow \beta_2 \boldsymbol{v}_{t-1} + (1 - \beta_2) \boldsymbol{g}_t \odot \boldsymbol{g}_t.</script><p>由于我们将$\boldsymbol{m}<em>0$和$\boldsymbol{s}_0$中的元素都初始化为0，<br>在时间步$t$我们得到$\boldsymbol{m}_t =  (1-\beta_1) \sum</em>{i=1}^t \beta<em>1^{t-i} \boldsymbol{g}_i$。将过去各时间步小批量随机梯度的权值相加，得到 $(1-\beta_1) \sum</em>{i=1}^t \beta_1^{t-i} = 1 - \beta_1^t$。需要注意的是，当$t$较小时，过去各时间步小批量随机梯度权值之和会较小。例如，当$\beta_1 = 0.9$时，$\boldsymbol{m}_1 = 0.1\boldsymbol{g}_1$。为了消除这样的影响，对于任意时间步$t$，我们可以将$\boldsymbol{m}_t$再除以$1 - \beta_1^t$，从而使过去各时间步小批量随机梯度权值之和为1。这也叫作偏差修正。在Adam算法中，我们对变量$\boldsymbol{m}_t$和$\boldsymbol{v}_t$均作偏差修正：</p>
+\boldsymbol{v}_t \leftarrow \beta_2 \boldsymbol{v}_{t-1} + (1 - \beta_2) \boldsymbol{g}_t \odot \boldsymbol{g}_t.</script><p>由于我们将$\boldsymbol{m}_0$和$\boldsymbol{s}_0$中的元素都初始化为0，<br>在时间步$t$我们得到$\boldsymbol{m}_t =  (1-\beta_1) \sum_{i=1}^t \beta_1^{t-i} \boldsymbol{g}_i$。将过去各时间步小批量随机梯度的权值相加，得到 $(1-\beta_1) \sum_{i=1}^t \beta_1^{t-i} = 1 - \beta_1^t$。需要注意的是，当$t$较小时，过去各时间步小批量随机梯度权值之和会较小。例如，当$\beta_1 = 0.9$时，$\boldsymbol{m}_1 = 0.1\boldsymbol{g}_1$。为了消除这样的影响，对于任意时间步$t$，我们可以将$\boldsymbol{m}_t$再除以$1 - \beta_1^t$，从而使过去各时间步小批量随机梯度权值之和为1。这也叫作偏差修正。在Adam算法中，我们对变量$\boldsymbol{m}_t$和$\boldsymbol{v}_t$均作偏差修正：</p>
 <script type="math/tex; mode=display">
 \hat{\boldsymbol{m}}_t \leftarrow \frac{\boldsymbol{m}_t}{1 - \beta_1^t},</script><script type="math/tex; mode=display">
 \hat{\boldsymbol{v}}_t \leftarrow \frac{\boldsymbol{v}_t}{1 - \beta_2^t}.</script><p>接下来，Adam算法使用以上偏差修正后的变量$\hat{\boldsymbol{m}}_t$和$\hat{\boldsymbol{m}}_t$，将模型参数中每个元素的学习率通过按元素运算重新调整：</p>
